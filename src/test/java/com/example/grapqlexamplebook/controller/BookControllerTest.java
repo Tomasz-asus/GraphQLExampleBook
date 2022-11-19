@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @GraphQlTest(BookController.class)
 class BookControllerTest {
@@ -64,4 +65,15 @@ class BookControllerTest {
                 .hasSize(3);
     }
 
+    @Test
+    void shouldBookWithTitle(){
+        //given
+        var firstname1 = new Author(1,"firstName1","lastName1");
+        Book book = new Book(1, "title1", 100, Rating.GOOD, firstname1);
+        //when
+        Book book1 = bookRepository.findByTitle("title1");
+
+        //then
+        assertThat(book.equals(book1));
+    }
 }

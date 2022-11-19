@@ -18,7 +18,7 @@ public class AuthorRepository {
 
     public Author findById(int id) {
         return authors.stream()
-                .filter(author -> author.id() == id)
+                .filter(author -> author.id().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Author with this id not found"));
     }
