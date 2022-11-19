@@ -27,4 +27,9 @@ public class BookController {
     public Book findOne(@Argument Integer id) {
         return bookRepository.findOne(id);
     }
+
+    @QueryMapping
+    public Book findByTitle(@Argument String title) {
+        return bookRepository.findByTitle(title);
+    }
 }

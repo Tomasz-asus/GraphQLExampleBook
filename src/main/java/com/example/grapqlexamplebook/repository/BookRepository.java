@@ -12,7 +12,7 @@ import java.util.List;
 public class BookRepository {
 
     private final AuthorRepository authorRepository;
-    private List<Book> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
 
     public BookRepository(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
@@ -23,7 +23,17 @@ public class BookRepository {
     }
 
     public Book findOne(Integer id) {
-        return books.stream().filter(book -> book.id() == id).findFirst().orElseThrow(() -> new RuntimeException("Book not found"));
+        return books.stream()
+                .filter(book -> book.id().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+    }
+
+    public Book findByTitle (String title) {
+        return books.stream()
+                .filter(book -> book.title().equals(title))
+                .findFirst()
+                .orElseThrow(()->new RuntimeException("Book with this title not found"));
     }
 
     @PostConstruct
